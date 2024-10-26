@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.42-beta'
+    id 'net.neoforged.moddev' version '2.0.31-beta'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -31,7 +31,7 @@ neoForge {
         minecraftVersion = project.parchment_minecraft_version
     }
 
-    // accessTransformers.add('src/main/resources/META-INF/accesstransformer.cfg')
+    //accessTransformers.add('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
@@ -59,17 +59,20 @@ neoForge {
             systemProperty 'forge.logging.markers', 'REGISTRIES'
             logLevel = org.slf4j.event.Level.DEBUG
         }
+    }
 
-        mods {
-            "${mod_id}" {
-                sourceSet(sourceSets.main)
-            }
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
         }
     }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
 
 dependencies {
 }
